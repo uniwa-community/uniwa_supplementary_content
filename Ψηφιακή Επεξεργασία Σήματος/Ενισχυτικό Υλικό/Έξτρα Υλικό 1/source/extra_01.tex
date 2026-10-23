@@ -1,0 +1,763 @@
+\documentclass{beamer}
+\usepackage[english,greek]{babel}
+\usecolortheme{default}
+\usetheme{Madrid}
+\usepackage{tikz}
+\usetikzlibrary{positioning} % Βιβλιοθήκη εντολών και δομών θέσης. 
+\usetikzlibrary{automata} % Βιβλιοθήκη αυτομάτων 
+\usetikzlibrary{shapes} 
+\usetikzlibrary {arrows.meta}
+\usepackage{amsmath}
+\usepackage{colortbl}
+\usepackage{cancel}
+
+\AtBeginSection[]
+{
+	\begin{frame}
+		\frametitle{Πίνακας Περιεχομένων}
+		\tableofcontents[currentsection]
+	\end{frame}
+}
+%Information to be included in the title page:
+\title[ΨΕΣ - Έξτρα Υλικό] %optional
+{Ψηφιακή Επεξεργασία Σήματος - Έξτρα Υλικό 01}
+
+\subtitle{Τριγωνομετρία \& Άσκηση Δειγματοληψίας (και λοιπά κουραφέξαλα)}
+
+\author[\textlatin{bruhvius23}] % (optional, for multiple authors)
+{\textlatin{bruhvius23}\inst{1}}
+
+\institute[ΠΑΔΑ] % (optional)
+{
+	\inst{1}%
+	Τμήμα Μηχανικών Πληροφορικής και Υπολογιστών\\
+	Πολυτεχνική Σχολή (χαχα καλό ε) \\
+	Πανεπιστήμιο Δυτικής Αττικής
+}
+
+\date[Γ\textlatin{WU} 2026] % (optional)
+{Γεωργουλάκη \textlatin{Weekly Update}, Οκτώβριος 2026}
+
+\begin{document}
+
+	\frame{\titlepage}
+% -----------------
+\section{Ασκήσεις Δειγματοληψίας + Τριγωνομετρία}	
+% δειγματοληψία
+% ---------------	
+	\begin{frame}
+		\frametitle{Ασκήσεις Δειγματοληψίας - 1η (Εκφώνηση)}
+		\textbf{Παράδειγμα:} Δίνεται το αναλογικό σήμα $x(t) = 2cos(100\pi t)$. Θεωρώντας ότι λαμβάνονται δείγματα του σήματος με ρυθμό $F_s=75Hz$, ποιο το σήμα διακριτού χρόνου που προκύπτει μετά τη δειγματοληψία και ποιο το σήμα συνεχούς χρόνου που προκύπτει από την ανακατασκευή$;$
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - 1η (Λύση-Εξήγηση)}
+	Σημειώνουμε αρχικά το ότι έχουμε ένα ημιτονοειδές σήμα. Αυτά, μπορούν να εκφραστούν ή ως $Acos(\Omega t)$ (ή $Asin(\Omega t)$) , με A να ορίζεται το πλάτος του σήματος και ω η \textbf{κυκλική (ή γωνιακή) συχνότητα}, ή ως $Acos(2\pi F t)$ και αντίστοιχα για το ημίτονο $sin$, όπου $\Omega = 2 \pi F$. 
+	\end{frame}
+	
+	\begin{frame}
+			\frametitle{Παράδειγμα Αναλογικού Σήματος - Ημίτονο}
+		Έστω η γραφική παράσταση του κλασικού ημιτόνου $sin(x)$. \pause
+		\begin{center}
+		\begin{tikzpicture}
+			\draw[->] (-2.5,0) -- (7.5,0);
+			\draw[->] (0,-2.5) -- (0,2.5);
+			\draw (0,0) sin (1.57079632679,1) cos(3.1415926535,0) sin(4.71238898038,-1) cos(6.28318,0);
+			% Σημείωση 0 -----
+			\draw (0,0) node[below left,shape=circle] {0};
+			% -----------
+			
+			%---------
+			% Σημείωση π/2
+			% π/2 στον x
+			\draw[blue,thick,dotted] (1.57079632679,1) -- (1.57079632679,0); 
+			\draw (1.57079632679,0) node[below] {$\frac{\pi}{2}$};
+			% 1 στον y
+			\draw[blue,thick,dotted] (1.57079632679,1) -- (0,1);
+			\draw (0,1) node[left] {$1$};
+			% circle, fill, inner sep=1pt
+			\draw (1.57079632679,1) node[circle, fill, inner sep=1pt] {};
+			% ---------
+			
+			% Σημείωση π
+			% π στον x
+
+			% 0 στον y
+
+			% circle, fill, inner sep=1pt
+			\draw (3.1415926535,0) node[circle, fill, inner sep=1pt]{};			
+			\draw (3.1415926535,0) node[below left] {$\pi$};
+			
+		 	%---------
+		 	% Σημείωση 3π/2
+		 	% 3π/2 στον x
+		 	\draw[blue,thick,dotted] (4.71238898038,-1) -- (4.71238898038,0); 
+		 	\draw (4.71238898038,0) node[above] {$\frac{3\pi}{2}$};
+		 	% 1 στον y
+		 	\draw[blue,thick,dotted] (4.71238898038,-1) -- (0,-1);
+		 	\draw (0,-1) node[left] {$-1$};
+		 	% circle, fill, inner sep=1pt
+		 	\draw (4.71238898038,-1) node[circle, fill, inner sep=1pt] {};
+		 	% ---------
+			
+			
+			% Σημείωση 2π
+			% 2π στον x
+			
+			% 0 στον y
+			
+			% circle, fill, inner sep=1pt
+			\draw (6.28318,0) node[circle, fill, inner sep=1pt]{};			
+			\draw (6.28318,0) node[below right] {$2\pi$};
+		\end{tikzpicture}
+		\end{center} \pause
+		Παρατηρήστε ότι το σήμα φτάνει μέχρι το +1 και το -1 στον κατακόρυφο άξονα. Αν λάβουμε υπόψη την αρχή των αξόνων $O$, απέχει 1 μονάδα από την μέγιστη και ελάχιστη τιμή του σήματος αντίστοιχα. Αυτό καθιστά το πλάτος του $A$, όπου εδώ ισχύει $A=1$.
+	\end{frame}
+
+	\begin{frame}
+	\frametitle{Παράδειγμα Αναλογικού Σήματος - Ημίτονο}
+	Έστω η γραφική παράσταση του κλασικού ημιτόνου $sin(x)$. 
+	\begin{center}
+		\begin{tikzpicture}
+	\draw[->] (-2.5,0) -- (7.5,0);
+	\draw[->] (0,-2.5) -- (0,2.5);
+	\draw (0,0) sin (1.57079632679,1) cos(3.1415926535,0) sin(4.71238898038,-1) cos(6.28318,0);
+	% Σημείωση 0 -----
+	\draw (0,0) node[below left,shape=circle] {0};
+	% -----------
+	
+	%---------
+	% Σημείωση π/2
+	% π/2 στον x
+	\draw[blue,thick,dotted] (1.57079632679,1) -- (1.57079632679,0); 
+	\draw (1.57079632679,0) node[below] {$\frac{\pi}{2}$};
+	% 1 στον y
+	\draw[blue,thick,dotted] (1.57079632679,1) -- (0,1);
+	\draw (0,1) node[left] {$1$};
+	% circle, fill, inner sep=1pt
+	\draw (1.57079632679,1) node[circle, fill, inner sep=1pt] {};
+	% ---------
+	
+	% Σημείωση π
+	% π στον x
+	
+	% 0 στον y
+	
+	% circle, fill, inner sep=1pt
+	\draw (3.1415926535,0) node[circle, fill, inner sep=1pt]{};			
+	\draw (3.1415926535,0) node[below left] {$\pi$};
+	
+	%---------
+	% Σημείωση 3π/2
+	% 3π/2 στον x
+	\draw[blue,thick,dotted] (4.71238898038,-1) -- (4.71238898038,0); 
+	\draw (4.71238898038,0) node[above] {$\frac{3\pi}{2}$};
+	% 1 στον y
+	\draw[blue,thick,dotted] (4.71238898038,-1) -- (0,-1);
+	\draw (0,-1) node[left] {$-1$};
+	% circle, fill, inner sep=1pt
+	\draw (4.71238898038,-1) node[circle, fill, inner sep=1pt] {};
+	% ---------
+	
+	
+	% Σημείωση 2π
+	% 2π στον x
+	
+	% 0 στον y
+	
+	% circle, fill, inner sep=1pt
+	\draw (6.28318,0) node[circle, fill, inner sep=1pt]{};			
+	\draw (6.28318,0) node[below right] {$2\pi$};
+	\end{tikzpicture}
+	\end{center}
+	Υποθέστε επίσης πως το σύστημα των συντεταγμένων εννοεί τα $y$ και $x$ στον κατακόρυφο και οριζόντιο άξονα αντίστοιχα αλλά δεν αναγράφονται ρητά για εξοικονόμηση χώρου.
+\end{frame}	
+
+	\begin{frame}
+	\frametitle{Παράδειγμα Αναλογικού Σήματος - Ημίτονο}
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[->] (-2.5,0) -- (7.5,0);
+			\draw[->] (0,-2.5) -- (0,2.5);
+			\draw (0,0) sin (1.57079632679,1) cos(3.1415926535,0) sin(4.71238898038,-1) cos(6.28318,0);
+			% Σημείωση 0 -----
+			\draw (0,0) node[below left,shape=circle] {0};
+			% -----------
+			
+			%---------
+			% Σημείωση π/2
+			% π/2 στον x
+			\draw[blue,thick,dotted] (1.57079632679,1) -- (1.57079632679,0); 
+			\draw (1.57079632679,0) node[below] {$\frac{\pi}{2}$};
+			% 1 στον y
+			\draw[blue,thick,dotted] (1.57079632679,1) -- (0,1);
+			\draw (0,1) node[left] {$1$};
+			% circle, fill, inner sep=1pt
+			\draw (1.57079632679,1) node[circle, fill, inner sep=1pt] {};
+			% ---------
+			
+			% Σημείωση π
+			% π στον x
+			
+			% 0 στον y
+			
+			% circle, fill, inner sep=1pt
+			\draw (3.1415926535,0) node[circle, fill, inner sep=1pt]{};			
+			\draw (3.1415926535,0) node[below left] {$\pi$};
+			
+			%---------
+			% Σημείωση 3π/2
+			% 3π/2 στον x
+			\draw[blue,thick,dotted] (4.71238898038,-1) -- (4.71238898038,0); 
+			\draw (4.71238898038,0) node[above] {$\frac{3\pi}{2}$};
+			% 1 στον y
+			\draw[blue,thick,dotted] (4.71238898038,-1) -- (0,-1);
+			\draw (0,-1) node[left] {$-1$};
+			% circle, fill, inner sep=1pt
+			\draw (4.71238898038,-1) node[circle, fill, inner sep=1pt] {};
+			% ---------
+			
+			
+			% Σημείωση 2π
+			% 2π στον x
+			
+			% 0 στον y
+			
+			% circle, fill, inner sep=1pt
+			\draw (6.28318,0) node[circle, fill, inner sep=1pt]{};			
+			\draw (6.28318,0) node[below right] {$2\pi$};
+		\end{tikzpicture}
+	\end{center}
+	Σημειώστε τώρα πως έχουμε τη μορφή $Asin(\Omega x)$ , δεν φαίνεται έστω κάποιο 2π. Εδώ, θα πρέπει για να βρούμε τα μεγέθη που θέλουμε, να αναφερθούμε σε κάποιους παλιούς ορισμούς.
+\end{frame}
+\begin{frame}
+	\frametitle{Παράδειγμα Αναλογικού Σήματος - Ημίτονο (Ορισμοί)}
+	Αν βρεθούμε στο σημείο $(2\pi,0)$ και προβούμε στο σημείο όπου $x=0$, τότε έχουμε $sin(x)=sin(x-2\pi)=0$. Ομοίως και αν προσθέσουμε $2\pi$ όταν $x=0$ θα βρεθούμε στο ίδιο σημείο. Βάσει τριγωνομετρίας κιόλας όπου θα δούμε πρόχειρα πως εξηγείται αυτό, αν συνεχίζαμε κατά 2π απ'όπου $x=2\pi$, τότε θα καταληγάμε με $sin(x)=sin(x-2\pi)=sin(x+2\pi)=0$. \pause
+	\\~\\
+	Προσπαθήστε να κάνετε το ίδιο για τα σημεία όπου ξέρετε ότι $sin(x) = 1$ ή που ξέρετε την τιμή της συνάρτησης, να δείτε αν $sin(x-2\pi) = sin(x+2\pi) = sin(x)$. Θα προσέξετε το εξής: 	Θα προσέξετε ότι το σήμα \textbf{επαναλαμβάνεται} άνα $2\pi$ χρονικές μονάδες. Αυτό ονομάζεται \textbf{περιόδος} ή \textbf{$T$}. Εδώ, αφού επαναλαμβάνεται το σήμα ανα $2\pi$ χρονικές μονάδες έχουμε $T=2\pi$ (έστω $T=2\pi ~sec$).
+\end{frame}
+\begin{frame}
+	\frametitle{Παράδειγμα Αναλογικού Σήματος - Ημίτονο (Ορισμοί)}
+
+	
+	\begin{block}{Περίοδος - Ορισμός}
+	Η \textbf{περίοδος}, συμβολιζόμενη ως $T$, αποτελεί τον ελάχιστο χρόνο μεταξύ δύο επαναλήψεων ενός περιοδικού σήματος. Μετριέται συνήθως σε $sec$.
+	\end{block}
+	Η περίοδος και το αν ένα σήμα είναι περιοδικό επικυρώνονται με δύο συνθήκες: \pause 
+	\begin{itemize} 
+		\item $\exists T>0,\forall x \in A: x-T \in A \wedge x+T \in A$, όπου $A$ το πεδίο ορισμού της συνάρτησης (ή γενικά με όσα $x$ μπορούμε να ``παίξουμε μπάλα``). \pause
+		\item Μετά ή πρίν από Τ χρονικές μονάδες από ένα δοθέν σημείο, η συνάρτηση να επιστρέφει την ίδια τιμή δηλαδή $f(x-T) = f(x+T) = f(x)$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Παράδειγμα Αναλογικού Σήματος - Ημίτονο (Ορισμοί)}
+	Ωστόσο, βλέπουμε πως η μορφή του ημιτονοειδούς σήματος που έχουμε ($sin(x)$), δεν αναγράφει κάπου την περιόδο του ή κατι κοντινό σε αυτή. Εδώ, δεδομένου ότι δεν μιλάμε \textbf{απλώς} για την συνάρτηση ημιτόνου, μπορούμε να χρησιμοποιήσουμε έναν απλό (αλλά προσωρινά άχρηστο) ορισμό, προιδεασμένοι από την σχέση $\Omega=2\pi F$:
+	\begin{center}
+		Η κυκλική συχνότητα $\Omega$ αφορά στο ρυθμό μεταβολής ενός γωνιακού μεγέθους και \alert{συμπεριλαμβάνει} την συχνότητα που θέλουμε να βρούμε.
+	\end{center}
+	Η συχνότητα, με τη σειρά της, ορίζεται ως εξής:
+		\begin{block}{Συχνότητα - Ορισμός}
+		Η \textbf{συχνότητα}, συμβολιζόμενη ως $F$, αποτελεί τον αριθμό των επαναλήψεων ενός περιοδικού σήματος εντός μίας χρονικής μονάδας (π.χ. $sec$). Μετριέται συνήθως σε \textlatin{$Hz$ (Hertz)} ή \textlatin{sec$^{-1}$}.
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Παράδειγμα Αναλογικού Σήματος - Ημίτονο (Ορισμοί)}
+	Η μονάδα μέτρησης της συχνότητας προκύπτει από το γεγονός ότι η περίοδος και η συχνότητα είναι \textbf{αντίστροφα} μεγέθη (δηλ. $F=\frac{1}{T}$).\\
+	Εδώ όμως, βρίσκουμε μόνο την γωνιακή συχνότητα $\Omega$, όπου αν βασιστούμε στη συνάρτηση $sin(x)$ , έχουμε ότι $\Omega = 1$ αν υποθέσουμε τη μορφή $Asin(\Omega t)$.
+	\\ 
+	Για να βρούμε τη συχνότητα, απλώς κάνουμε αντικαταστάσεις.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Παράδειγμα Αναλογικού Σήματος - Ημίτονο (Ορισμοί)}
+	Έστω $\Omega = 1$ και $\Omega = 2 \pi F$. Εκ των δύο σχέσων απορέει: \pause
+	\begin{center}
+		\begin{align*}
+			\Omega = 1 \rightarrow 2\pi F = 1 \rightarrow F = \frac{1}{2\pi}  
+		\end{align*}
+	\end{center}
+	Άρα η συχνότητα του $sin(x)$ είναι $\frac{1}{2\pi}$ (έστω $Hz$), πράγμα το οποίο μπορούμε να επαληθεύσουμε και με τον τύπο $F=T^{-1}$. Ωστόσο, θα χρησιμοποιήσουμε αυτόν τον τύπο ώστε να αντλήσουμε την συχνότητα που θέλουμε να εξετάσουμε.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - 1η (Λύση-Εξήγηση)}
+	Γυρνώντας στο σήμα της άσκησης, έχουμε $x(t) = 2\cos(100\pi t)$.  \\~\\ Εδώ, μπορούμε με ευκολία να υποθέσουμε πως έχουμε ένα σήμα της μορφής $A\cos(\Omega t)$, όπου $A = 2$ και $\Omega = 100\pi$. \\~\\
+	\pause
+	
+	Γνωρίζοντας ότι $\Omega = 2\pi F$, αντικαθιστούμε τις μεταβλητές με γνωστές τιμές στην προηγούμενη σχέση, καταλήγοντας στην $100\pi = 2\pi F \rightarrow \frac{100\pi}{2\pi} = F \rightarrow F = 50Hz$.
+\end{frame}
+
+\begin{frame}
+		\frametitle{Ασκήσεις Δειγματοληψίας - Δειγματοληψία}
+		Πριν συνεχίσουμε, ας σημειώσουμε στην... κοινή Ελληνική το τι πρόκειται να δούμε. \\~\\
+		Όταν λαμβάνουμε ένα σήμα αναλογικό (συνεχούς χρόνου και συνεχούς πλάτους), αυτό σημαίνει ότι έχουμε να κάνουμε με ένα σήμα \alert{\textbf{άπειρων}} υποδιαιρέσεων στον \textbf{χρόνο} (ακόμη και σε ένα διάστημα 2```` μπορεί να έχουμε 0.1 δεύτερα , 0.01, 0.001 κ.ο.κ.) , με το ίδιο πράγμα να ισχύει και για το \textbf{πλάτος} (παρόμοια λογική με το ότι μεταξύ του 0 και του 1 υπάρχουν άπειροι αριθμοί).
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - Δειγματοληψία}
+	Αυτό, όπως αντιλαμβάνεστε, θα ζορίσει πάρα πολύ τον υπολογιστή η οποιοδήποτε σύστημα κληθεί να αποθηκεύσει αυτό το σήμα γιατί θα έχει υπέρογκα δεδομένα να διαχειριστεί! \\~\\
+	Έτσι, κληθήκαμε τώρα να αντιμετωπίσουμε δύο θέματα:
+	\begin{itemize}
+		\item 	\textbf{Πως} θα διαχειριστούμε τον συνεχή χρόνο \pause
+		\item \textbf{Πως} θα διαχειριστούμε το συνεχές πλάτος
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - Δειγματοληψία}
+	Για αυτό το κομμάτι ενισχυτικού υλικού, θα ασχοληθούμε με το πρώτο θέμα, για το οποίο έχει υπάρξει μέριμνα να αντιμετωπιστεί από τα ψηφιακά συστήματα. Πως όμως? \pause 
+	\\~\\ 
+	Μια ιδέα είναι να σκεφτούμε το εξής: τι και αν αντί για κάθε χρονική στιγμή του σήματος... αποθηκεύαμε ανά συγκεκριμένα τακτά διαστήματα τις τιμές του, σαν να ``τραβάμε ένα \textlatin{screenshot}'' του σήματος?
+	\pause \\~\\
+	Αυτή η ιδέα, όσο απίστευτο και να φαντάζει, είναι αυτή που εφαρμόζεται γενικά και αποτελεί το πρώτο εκ των κύριων τριών σταδίων της μετατροπής αναλογικού σήματος σε ψηφιακό. Αυτή είναι, λοιπόν, η λεγόμενη \textbf{δειγματοληψία} (\textlatin{sampling}) η οποία ονομάζεται έτσι καθώς λαμβάνουμε δείγματα του σήματος ανά τα προαναφερθέντα διαστήματα.
+	
+\end{frame}
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - Δειγματοληψία}
+	Πριν συνεχίσουμε, οφείλουμε να σημειώσουμε δύο ορισμούς που θα μας φανούν εξαιρετικά χρήσιμοι στη συνέχεια.
+	\begin{block}{Περίοδος Δειγματοληψίας - Ορισμός}
+		Η \textbf{περίοδος δειγματοληψίας} (\textlatin{sampling period}) αποτελεί το χρονικό διάστημα μεταξύ της λήψης 2 διαδοχικών δειγμάτων. Συμβολίζεται με $T_s$.
+	\end{block}
+		\begin{block}{Συχνότητα Δειγματοληψίας - Ορισμός}
+		Η \textbf{συχνότητα (ή ρυθμός) δειγματοληψίας} (\textlatin{sampling frequency / sampling rate}) αποτελεί τον αριθμό των δειγμάτων που λαμβάνονται σε μια χρονική μονάδα (π.χ. δευτερόλεπτα). Συμβολίζεται με $F_s$.
+	\end{block}
+	Για παράδειγμα, αν παίρνουμε ένα δείγμα ανά $0.5\sec$ τοτε $T_s=0.5\sec$ και $F_s = 1/0.5 Hz \rightarrow F = 2 Hz$.
+\end{frame}
+
+
+\begin{frame}
+		\frametitle{Ασκήσεις Δειγματοληψίας - Δειγματοληψία (συν.)}
+	Γνωρίζουμε λοιπόν ότι η συχνότητα του αναλογικού μας σήματος είναι $50Hz$. Η δειγματοληψία σαν τεχνική διέπεται από ένα συγκεκριμένο θεώρημα το οποίο άπαξ και αληθεύει, καθιστά δυνατή την ορθή ανακατασκευή ενός δειγματοληπτημένου αναλογικού σήματος (διακριτού χρόνου) στο αντίστοιχο αναλογικό σήμα. 
+	\begin{block}{Θεώρημα \textlatin{Nyquist-Shannon}}
+		Για να μπορεί να ανασυσταθεί ένα αναλογικό σήμα από ένα ψηφιακό δίχως απώλεια πληροφορίας, θα πρέπει $F_s \geq 2F_{max}$.
+	\end{block}
+	\pause
+	Το $F_{max}$ συνιστά τη μέγιστη συχνότητα ενός σήματος, που συνήθως θα είναι αυτή που θα εκλαμβάνεται από το εκάστοτε σήμα (π.χ. για το παρόν σήμα έχουμε $F_{max} = 50Hz$ καθώς $F=50Hz$).
+\end{frame}
+
+\begin{frame}
+		\frametitle{Ασκήσεις Δειγματοληψίας - 1η (Λύση-Εξήγηση)}
+		Εδώ, βλέπουμε πως $F_s < 2*F_{max} \rightarrow 75 < 2*50 \rightarrow 75 < 100$. Επομένως, \textbf{ΔΕΝ} ικανοποιείται η συνθήκη του θεωρήματος \textlatin{Nyquist} και θα αντιμετωπίσουμε θέμα. \pause \\~\\
+		Συγκεκριμένα, μπορεί να καταλήξουμε να χειριζόμαστε και κάποιες συχνότητες που κανονικά δεν υπάρχουν (ψευδείς συχνότητες). Εδώ δεν πρόκειται να σημειωθεί κάτι για την απόδειξη-εξήγηση, καθώς αυτή αναγράφεται στις σημειώσεις της 1ης εβδομάδας. \\~\\
+		Για τώρα, ας επικεντρωθούμε στην κατασκευή του σήματος διακριτού χρόνου που αποτελεί επακόλουθο της (κακής) δειγματοληψίας μας.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - 1η (Λύση-Εξήγηση)}
+	Αρχικά, θα πάρουμε το αναλογικό μας σήμα και την μορφή που γνωρίζουμε ($A\cos(\Omega t)$) και θα αντικαταστήσουμε το $\Omega t$ με το $\omega n$. 
+	\begin{itemize}
+		\item Το $\omega$ αποτελεί την ψηφιακή κυκλική συχνότητα, η οποία ορίζεται ως $\omega = \Omega T_s = \frac{\Omega}{F_s}$.
+		\item Το $n$ αποτελεί έναν απαριθμητή των δειγμάτων δηλ. μια μεταβλητή που σημείωνε ότι βρισκόμαστε στο 1ο,2ο, ... $n$-οστό δείγμα.
+	\end{itemize} 
+	Στην παρούσα περίπτωση έχουμε $x(t)=2\cos(100\pi t) \rightarrow x[n] = 2\cos(\frac{100\pi}{75}n) \rightarrow x[n] = 2\cos(\frac{4\pi n}{3})$ (διαιρώντας τον αριθμητή και τον παρονομαστή με 25).
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - Τριγωνομετρία}
+	Τώρα, το θέμα είναι να καταλήξουμε με μια πιο απλή μορφή του συνημιτόνου (προτιμότερα, κάποια με μικρότερη συχνότητα). Πώς θα το καταφέρουμε αυτό$\colon$
+	\pause \\~\\
+	Για να δούμε πως θα το επιτύχουμε αυτό, ας αναφερθούμε στον τριγωνομετρικό κύκλο!
+\end{frame}
+\begin{frame}
+		\frametitle{Ασκήσεις Δειγματοληψίας -  Τριγωνομετρία}
+		\begin{center}
+			\begin{tikzpicture}
+		\draw (-3,0) -- (3,0);
+		\draw (0,3) -- (0,-3);
+		\draw (0,0) circle (2);
+		\draw (3,0) node[right] {$x$};
+		\draw (-3,0) node[left] {$-x$};
+		\draw (0,3) node[right] {$y$};
+		\draw (0,-3) node[right] {$-y$};
+	\end{tikzpicture}		
+		\end{center}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας -  Τριγωνομετρία}
+	\begin{columns}
+			\column{0.4\textwidth}
+
+			\begin{tikzpicture}
+				\draw (-2,0) -- (2,0);
+				\draw (0,2) -- (0,-2);
+				\draw (0,0) circle (1);
+				\draw (2,0) node[right] {$x$};
+				\draw (-2,0) node[left] {$-x$};
+				\draw (0,2) node[right] {$y$};
+				\draw (0,-2) node[right] {$-y$};
+			\end{tikzpicture}		
+
+		\column{0.6\textwidth}
+		\centering
+		Εδώ, σε μικρότερη κλίμακα, είναι ο τριγωνομετρικός κύκλος. \\~\\
+		Αυτός αποτελεί μια ειδική περίπτωση κύκλου, όπου η ακτίνα του δηλ. η απόσταση του κέντρου του από την περιφέρεια του έχει μήκος \textbf{μονάδα} ($r=1$).
+	\end{columns}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας -  Τριγωνομετρία}
+	\begin{columns} 
+		\column{0.6\textwidth}
+		\begin{tikzpicture}
+			\draw (-3,0) -- (3,0);
+			\draw (0,3) -- (0,-3);
+			\draw (0,0) circle (2);
+			\draw (3,0) node[right] {$x$};
+			\draw (-3,0) node[left] {$-x$};
+			\draw (0,3) node[right] {$y$};
+			\draw (0,-3) node[right] {$-y$};
+			% radius and triangle
+			\draw[red] (0,0) -- (1.2,1.6);
+			\draw[thick, blue] (1.2,1.6) -- (1.2,0);
+			\draw[thick,orange] (0,0) -- (1.2,0);
+			\draw (1.0,1.5) node[below left] {{\textcolor{red}{$r$}}};
+			\draw (0.6,-0.15) node {{\textcolor{orange}{$x'$}}};
+			\draw (1.20,1.20) node[below right] {{\textcolor{blue}{$y'$}}};
+			%
+			 \draw (0.5,0) arc(0:30:1) (0.11,0.14666667);
+			 \draw (0.65, 0.2) node {θ};
+		\end{tikzpicture}		
+´
+
+		\column{0.4\textwidth}
+		Γενικότερα θα αναλύσουμε τις γωνίες και τους σχετικούς τριγωνομετρικούς αριθμούς βάσει το πως σχηματίζονται μεταξύ μιας ακτίνας και των οριζόντιων ή κάθετων πλευρών που σχηματίζονται ως \textbf{συνδέσεων των προβολών} με το σημείο στον οριζόντιο άξονα (ή και της υποτείνουσας που προκύπτει από το προϊόν τρίγωνο).
+
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας -  Τριγωνομετρία}
+	\begin{columns}
+		\column{0.4\textwidth}
+		
+		\begin{tikzpicture}
+			\draw (-2,0) -- (2,0);
+			\draw (0,2) -- (0,-2);
+			\draw (0,0) circle (1);
+			\draw (2,0) node[right] {$x$};
+			\draw (0.5,0.5) node {\tiny{1o}};
+			\draw (-2,0) node[left] {$-x$};
+			\draw (-0.5,0.5) node {\tiny{2o}};
+			\draw (0,2) node[right] {$y$};
+			\draw (-0.5,-0.5) node {\tiny{3o}};
+			\draw (0,-2) node[right] {$-y$};
+			\draw (0.5,-0.5) node {\tiny{4o}};
+		\end{tikzpicture}		
+		
+		\column{0.6\textwidth}
+		\centering
+		Χωρίζεται σε τέσσερα τεταρτημόρια ως εξής:
+		\begin{itemize}
+			\item 1ο Τεταρτημόριο: 0 εως 90 μοίρες ($0$ εως $\frac{\pi}{2}$ ακτίνια)
+			\item 2ο Τεταρτημόριο: 90 εως 180 μοίρες ($\frac{\pi}{2}$ εως $\pi$ \textlatin{rad})
+			\item 3ο Τεταρτημόριο: 180 εως 270 μοίρες ($\pi$ εως $\frac{3\pi}{2}$ \textlatin{rad})
+			\item 4ο Τεταρτημόριο: 270 εως 360 μοίρες ($\frac{3\pi}{2}$ εως $2\pi$ \textlatin{rad})
+		 \end{itemize}
+	\end{columns}
+~\\
+Θυμίζουμε πως η μετατροπή μοιρών σε ακτίνια γίνεται με τη σχέση $\alpha = \frac{\pi}{180} * \delta$, όπου $\alpha$ τα ακτίνια και $\delta$ η γωνία σε μοίρες. Η μονάδα μέτρησης είναι $rad$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας -  Τριγωνομετρία}
+	Με τις σχετικές αποδείξεις να παρατίθενται σε αργότερο χρόνο σε χειρόγραφη μορφή για το παρόν \textlatin{thread}, αναφέρουμε εδώ ότι μέσω των σχέσεων που μπορούν να εμφανιστούν εδώ, δύναται να λάβουμε τους τριγωνομετρικούς αριθμούς κάθε γωνίας, αλλά να δούμε και κάποια άλλα πράγματα. Για παράδειγμα:
+	\begin{itemize}
+		\item Έστω ότι θέλουμε να υπολογίσουμε ένα ημίτονο. Αυτό υπολογίζεται ως το πηλίκο της διαίρεσης της απέναντι της γωνίας πλευράς με την υποτείνουσα του τριγώνου. \pause Αν γνωρίζουμε ότι η υποτείνουσα είναι 1 καθώς είναι η ακτίνα, τότε η απέναντι πλευρά ξέρουμε ότι είναι ίση με το εκάστοτε ημίτονο.
+		\item Με παρόμοια λογική λειτουργεί και το συνημίτονο, όπως θα αναδειχθεί και στην επόμενη διαφάνεια.
+		\item Διαισθητικά, καταλαβαίνουμε πως και αν προβούμε σε πρόσθεση 2π σε μια γωνία, επιστρέφουμε πάλι σε αυτήν άρα $\cos(x) = \cos(x+2\pi)$ και $\sin(x) = \sin(x+2\pi)$.
+	\end{itemize}
+\end{frame}
+
+% Prove how sines work
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας -  Τριγωνομετρία}
+	\begin{columns} 
+		\column{0.6\textwidth}
+		\begin{tikzpicture}
+			\draw (-3,0) -- (3,0);
+			\draw (0,3) -- (0,-3);
+			\draw (0,0) circle (2);
+			\draw (3,0) node[right] {$x$};
+			\draw (-3,0) node[left] {$-x$};
+			\draw (0,3) node[right] {$y$};
+			\draw (0,-3) node[right] {$-y$};
+			% radius and triangle
+			\draw[red] (0,0) -- (0,2);
+			%\draw[thick, blue] (1.2,1.6) -- (1.2,0);
+			%\draw[thick,orange] (0,0) -- (1.2,0);
+			%\draw (1.0,1.5) node[below left] {{\textcolor{red}{$r$}}};
+			%\draw (0.6,-0.15) node {{\textcolor{orange}{$x'$}}};
+			%\draw (1.20,1.20) node[below right] {{\textcolor{blue}{$y'$}}};
+			% \draw (0.5,0) arc(0:90:1) ()
+		\end{tikzpicture}		
+		
+		
+		\column{0.4\textwidth}
+		\only<1>
+		{Υποθέστε πως η γωνία που σχηματίζει μια ευθεία που σχεδιάζουμε από το σημείο Ο(0,0) με τον οριζόντιο άξονα είναι 90 μοίρες (δηλαδή έχουμε προχωρήσει 90 μοίρες από την αρχή του κύκλου).}
+		\only<2>
+		{Τώρα ας δούμε το εξής:
+			\begin{itemize}
+				
+				\item Αν θέλω να δω που είναι η προβολή του σημείου που καταλήγουμε στην ευθεία $x$ βλέπουμε πως είμαστε ακριβώς επάνω, άρα δεν ορίζεται κάποια ευθεία άρα $|x'|=0$.
+			\end{itemize}
+		}
+		
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας -  Τριγωνομετρία}
+	\begin{columns} 
+		\column{0.6\textwidth}
+		\begin{tikzpicture}
+			\draw (-3,0) -- (3,0);
+			\draw (0,3) -- (0,-3);
+			\draw (0,0) circle (2);
+			\draw (3,0) node[right] {$x$};
+			\draw (-3,0) node[left] {$-x$};
+			\draw (0,3) node[right] {$y$};
+			\draw (0,-3) node[right] {$-y$};
+			% radius and triangle
+			\draw[red] (0,0) -- (0,2);
+			%\draw[thick, blue] (1.2,1.6) -- (1.2,0);
+			%\draw[thick,orange] (0,0) -- (1.2,0);
+			%\draw (1.0,1.5) node[below left] {{\textcolor{red}{$r$}}};
+			%\draw (0.6,-0.15) node {{\textcolor{orange}{$x'$}}};
+			%\draw (1.20,1.20) node[below right] {{\textcolor{blue}{$y'$}}};
+			% \draw (0.5,0) arc(0:90:1) ()
+		\end{tikzpicture}		
+		
+		
+		\column{0.4\textwidth}
+		Τώρα ας δούμε το εξής:
+			\begin{itemize}
+				\item Αν θέλω να δω που είναι η προβολή του σημείου που καταλήγουμε στην ευθεία $y$ βλέπουμε πως θα ταυτίζεται με την ακτίνα μας καθώς θα είναι μια κάθετη ευθεία γραμμή από το σημείο (0,1) στο (0,0) το οποίο κοιτά ακριβώς κάθετα. Άρα $|y'|=1$.
+			\end{itemize}
+		
+		
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας -  Τριγωνομετρία}
+	\begin{columns} 
+		\column{0.6\textwidth}
+		\begin{tikzpicture}
+			\draw (-3,0) -- (3,0);
+			\draw (0,3) -- (0,-3);
+			\draw (0,0) circle (2);
+			\draw (3,0) node[right] {$x$};
+			\draw (-3,0) node[left] {$-x$};
+			\draw (0,3) node[right] {$y$};
+			\draw (0,-3) node[right] {$-y$};
+			% radius and triangle
+			\draw[red] (0,0) -- (0,2);
+			%\draw[thick, blue] (1.2,1.6) -- (1.2,0);
+			%\draw[thick,orange] (0,0) -- (1.2,0);
+			%\draw (1.0,1.5) node[below left] {{\textcolor{red}{$r$}}};
+			%\draw (0.6,-0.15) node {{\textcolor{orange}{$x'$}}};
+			%\draw (1.20,1.20) node[below right] {{\textcolor{blue}{$y'$}}};
+			% \draw (0.5,0) arc(0:90:1) ()
+		\end{tikzpicture}		
+		
+		
+		\column{0.4\textwidth}
+		Όταν αναφερόμαστε σε σχήματα αναπαριστώμενα επί του Καρτεσιανού συστήματος συντεταγμένων, οι τύποι υπολογισμού των συνημίτονων και ημίτονων είναι:
+		\begin{itemize}
+			\item συνθ = $\cos(\theta) = \frac{x'}{r}$
+			\item ημθ = $\sin(\theta) = \frac{y'}{r}$
+		\end{itemize}
+	\end{columns}
+, όπου $r$ η ακτίνα και $x'$ και $y'$ τα ευθύγραμμα τμήματα που αναφέραμε πριν (αυτά που ενώνουν τις αντίστοιχες προβολές με τους άξονες).
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας -  Τριγωνομετρία}
+	\begin{columns} 
+		\column{0.6\textwidth}
+		\begin{tikzpicture}
+			\draw (-3,0) -- (3,0);
+			\draw (0,3) -- (0,-3);
+			\draw (0,0) circle (2);
+			\draw (3,0) node[right] {$x$};
+			\draw (-3,0) node[left] {$-x$};
+			\draw (0,3) node[right] {$y$};
+			\draw (0,-3) node[right] {$-y$};
+			% radius and triangle
+			\draw[red] (0,0) -- (0,2);
+			%\draw[thick, blue] (1.2,1.6) -- (1.2,0);
+			%\draw[thick,orange] (0,0) -- (1.2,0);
+			%\draw (1.0,1.5) node[below left] {{\textcolor{red}{$r$}}};
+			%\draw (0.6,-0.15) node {{\textcolor{orange}{$x'$}}};
+			%\draw (1.20,1.20) node[below right] {{\textcolor{blue}{$y'$}}};
+			% \draw (0.5,0) arc(0:90:1) ()
+		\end{tikzpicture}		
+		
+		
+		\column{0.4\textwidth}
+		Έχουμε λοιπόν:
+		\begin{itemize}
+			\item $\cos(\frac{\pi}{2}) = \frac{x'}{r} = \frac{0}{1} = 0$
+			\item $\sin(\frac{\pi}{2}) = \frac{y'}{r} = \frac{1}{1} = 1$
+		\end{itemize}
+	Άρα υπολογίσαμε πως το ημίτονο των 90 μοιρών είναι 1, ενώ το συνημίτονο 0. Με παρόμοιο τρόπο μπορούμε να υπολογίσουμε και άλλους τριγωνομετρικούς αριθμούς (βρίσκετε ονλάιν κάποιο πίνακα σχετικό).
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	% Please add the following required packages to your document preamble:
+	% \usepackage[table,xcdraw]{xcolor}
+	% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
+	\begin{table}[]
+		\centering
+		\begin{tabular}{|l|llllllll|}
+			\hline
+			& \multicolumn{8}{c|}{\cellcolor[HTML]{AB5E5E}Γωνία (σε ακτίνια)}                                                                                                                                                                                                \\ \hline
+			\multicolumn{1}{|c|}{\cellcolor[HTML]{AB5E5E}Τριγωνομετρικοί Αριθμοί} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{$\frac{\pi}{6}$}      & \multicolumn{1}{l|}{$\frac{\pi}{4}$}      & \multicolumn{1}{l|}{$\frac{\pi}{3}$}      & \multicolumn{1}{l|}{$\frac{\pi}{2}$} & \multicolumn{1}{l|}{$\pi$} & \multicolumn{1}{l|}{$\frac{3\pi}{2}$} & 2$\pi$ \\ \hline
+			$\sin(\theta)$                                                        & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{$\frac{1}{2}$}        & \multicolumn{1}{l|}{$\frac{\sqrt{2}}{2}$} & \multicolumn{1}{l|}{$\frac{\sqrt{3}}{2}$} & \multicolumn{1}{l|}{1}               & \multicolumn{1}{l|}{0}     & \multicolumn{1}{l|}{-1}               & 0      \\ \hline
+			$\cos(\theta)$                                                        & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{$\frac{\sqrt{3}}{2}$} & \multicolumn{1}{l|}{$\frac{\sqrt{2}}{2}$} & \multicolumn{1}{l|}{$\frac{1}{2}$}        & \multicolumn{1}{l|}{0}               & \multicolumn{1}{l|}{-1}    & \multicolumn{1}{l|}{0}                & 1      \\ \hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - Τριγωνομετρία (συν.)}
+		\begin{columns} 
+		\column{0.6\textwidth}
+		\begin{tikzpicture}
+			\draw (-3,0) -- (3,0);
+			\draw (0,3) -- (0,-3);
+			\draw (0,0) circle (2);
+			\draw (3,0) node[right] {$x$};
+			\draw (-3,0) node[left] {$-x$};
+			\draw (0,3) node[right] {$y$};
+			\draw (0,-3) node[right] {$-y$};
+			% radius and triangle
+			\draw[red] (0,0) -- (1.2,-1.6);
+			\draw[blue] (0,0) -- (1.2,1.6);
+			%\draw[thick, blue] (1.2,1.6) -- (1.2,0);
+			%\draw[thick,orange] (0,0) -- (1.2,0);
+			%\draw (1.0,1.5) node[below left] {{\textcolor{red}{$r$}}};
+			%\draw (0.6,-0.15) node {{\textcolor{orange}{$x'$}}};
+			%\draw (1.20,1.20) node[below right] {{\textcolor{blue}{$y'$}}};
+			% \draw (0.5,0) arc(0:90:1) ()
+		\end{tikzpicture}		
+		
+		
+		\column{0.4\textwidth}
+		\begin{itemize}
+		\item	Έστω ότι η μπλε ευθεία δείχνει στις 45 μοίρες ($\frac{\pi}{4}$ ακτίνια) και η κόκκινη στα $-\frac{\pi}{4}$.
+		\item Αν προσέξουμε, θα δούμε ότι στον οριζόντιο άξονα έχουν την ίδια ακριβώς προβολή! Επομένως, $|x'| = \frac{\sqrt{2}}{2}$
+	\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - Τριγωνομετρία (συν.)}
+	\begin{columns} 
+		\column{0.6\textwidth}
+		\begin{tikzpicture}
+			\draw (-3,0) -- (3,0);
+			\draw (0,3) -- (0,-3);
+			\draw (0,0) circle (2);
+			\draw (3,0) node[right] {$x$};
+			\draw (-3,0) node[left] {$-x$};
+			\draw (0,3) node[right] {$y$};
+			\draw (0,-3) node[right] {$-y$};
+			% radius and triangle
+			\draw[red] (0,0) -- (1.2,-1.6);
+			\draw[blue] (0,0) -- (1.2,1.6);
+			%\draw[thick, blue] (1.2,1.6) -- (1.2,0);
+			%\draw[thick,orange] (0,0) -- (1.2,0);
+			%\draw (1.0,1.5) node[below left] {{\textcolor{red}{$r$}}};
+			%\draw (0.6,-0.15) node {{\textcolor{orange}{$x'$}}};
+			%\draw (1.20,1.20) node[below right] {{\textcolor{blue}{$y'$}}};
+			% \draw (0.5,0) arc(0:90:1) ()
+		\end{tikzpicture}		
+		
+		
+		\column{0.4\textwidth}
+		\begin{itemize}
+			\item Εφαρμόζοντας τον τύπο του συνημιτόνου έχουμε $\cos(-\frac{\pi}{4}) = \frac{x'}{r} = \cos(\frac{\pi}{4})$. Γενικά λοιπόν, έχουμε πως \alert{$\cos(-x) = \cos(x)$}.
+			\item Επίσης, σημειώνουμε πως όπως είχαμε $\sin(x+2\pi) = \sin(x)$ και $\cos(x+2\pi) = \cos(x)$, μπορεί να έχουμε αμέτρητες περιστροφές, άρα ισχύει πως \alert{$\sin(x+k*2\pi) = \sin(x)$} και \alert{$\cos(x+k*2\pi) = \cos(x)$}, με $k \in \mathbb{Z}$.
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - 1η (Λύση-Εξήγηση)}
+		Έχουμε λοιπόν $x[n] = 2\cos(\frac{4\pi n}{3})$. Για να μετασχηματιστεί σε μια απλούστερη μορφή, προχωρούμε ως εξής:
+		\begin{itemize}
+			\item Θέλουμε να εμφανίσουμε πρώτα ένα πολλαπλάσιο ακέραιο του 2π, ώστε να μπορούμε να εφαρμόσουμε την ιδιότητα $\cos(x+2\pi) = \cos(x)$. Εδώ, μπορούμε να πούμε πως $x[n] = 2\cos(\frac{4\pi n}{3}) \rightarrow x[n] = 2\cos(\frac{6\pi n}{3} - \frac{2\pi n}{3}) \rightarrow x[n] = 2\cos(2\pi n - \frac{2\pi n}{3}) $. Έχουμε $n$ περιστροφές του κύκλου άρα καταλήγουμε σε $x[n] = 2\cos(\cancel{2\pi n} - \frac{2\pi n}{3}) \rightarrow 2\cos(- \frac{2\pi n}{3})$
+			\pause
+			\item Καθώς δείξαμε ότι $\cos(-x) = \cos(x)$, έχουμε μετ''ιδίας λογικής $x[n] = 2\cos(- \frac{2\pi n}{3}) \rightarrow \text{\textcolor{red}{$x[n] = 2\cos(\frac{2\pi n}{3})$}} $
+		\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - 1η (Λύση-Εξήγηση)}
+	Για να χτίσουμε τώρα το σήμα συνεχούς χρόνου που προκύπτει από την ανακατασκευή, θα λάβουμε τον τύπο
+	\begin{equation*}
+		f = F * T_s
+	\end{equation*}
+	και θα τον μετασχηματίσουμε σε
+	\begin{equation*}
+		f = F * T_s \rightarrow F = f * \frac{1}{T_s} \rightarrow F = f*F_s
+	\end{equation*}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - 1η (Λύση-Εξήγηση)}
+	Το $x[n]$ μας παρατηρούμε πως είναι της μορφής $A\cos[2\pi f n]$ , συγκεκριμένα δε
+	\begin{align*}
+		\omega = 2\pi f \rightarrow \frac{2\pi}{3} = 2\pi f \\ 
+		\rightarrow  \frac{2\pi}{3} * \frac{1}{2\pi} = 2\pi f * \frac{1}{2\pi} \rightarrow f = \frac{1}{3}
+	\end{align*} 
+	Συνεχίζοντας, έχουμε τον τύπο υπολογισμού της διακριτής συχνότητας με τη βοήθεια της αναλογικής και της περιόδου δειγματοληψίας. Αντικαθιστώντας, έχουμε:
+	\begin{equation*}
+		f = F' * T_s \rightarrow F' = f * \frac{1}{T_s} \rightarrow F' = f*F_s \rightarrow F' = \frac{1}{3} * 75
+	\end{equation*}
+	Άρα $F' = 25 Hz$.
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - 1η (Λύση-Εξήγηση)}
+	Άρα $F' = 25 Hz$ και αν τοποθετηθεί στο ως συχνότητα αναλογικού ημιτονοειδούς σήματος ίδιου πλάτους, έχουμε $x'(t) = 2\cos(2\pi25t)$ ή $x'(t) = 2\cos(50\pi t)$.\\~\\
+	
+	Υπάρχουν ψευδείς συχνότητες? \textbf{Ναι!} Μια εξ αυτών είναι η $F' = 25Hz$. \\~\\
+	
+	Αυτή η ψευδής συχνότητα, όπως αναφέραμε, είναι προϊόν της ασυμφωνίας με το Θεώρημα Δειγματοληψίας (ή Θεώρημα \textlatin{Nyquist-Shannon}).
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ασκήσεις Δειγματοληψίας - Οι Υπόλοιπες?}
+	Για υπόλοιπες ασκήσεις δειγματοληψίας (και αν προλάβουμε κάποια πραγματάκια σε \textlatin{Matlab}), θα αναφερθείτε στα υπόλοιπα αρχεία που θα συντελούν το ενισχυτικό υλικό του \textlatin{thread}. Αν υπάρχουν απορίες ή προτάσεις για διορθώσεις, αναφέρετε τις στο κανάλι του μαθήματος. \\~\\
+	\begin{center}
+		Καλή συνέχεια, και καλά διαβάσματα!
+	\end{center}
+	
+\end{frame}
+\section{Βιβλιογραφία}
+
+		\begin{frame}
+		\frametitle{Πηγές}
+\bibliographystyle{custard}
+
+\bibliography{fs}   % references.bib, without the extension
+\nocite{*}
+		\end{frame}
+\end{document}
